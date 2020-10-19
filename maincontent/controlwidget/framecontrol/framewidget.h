@@ -8,9 +8,10 @@
 
 #include <QWidget>
 #include <QDebug>
-#include "FrameControl.h"
+#include "framecontrol.h"
+#include<QLabel>
 
-class FlowLayout;//
+class FlowLayout;
 class QLabel;
 class QPushButton;
 
@@ -29,24 +30,13 @@ public:
     FlowLayout *flowLayout;//
     FlowLayout *flowLayout_;
    // void mouseDoubleClickEvent(QMouseEvent *);
-   // bool eventFilter(QObject  *obj, QEvent *event);
 private slots:
-    void on_pBn_Down_clicked();
-    //void mouseDoubleClickEvent(QMouseEvent *);
     void getStr(FrameControl *frame);
 private:
-   // QLabel *labelImage;
-     const int IMAGE_WIDTH = 300;
-     const int IMAGE_HEIGHT = 200;
-    QLabel *labelTitle;
-    const int FIXED_WIDTH = 300;
-    const int FIXED_HEIGHT = 200;
-//    const QString IMAGE_PATH = ":/res/res/image/image.png";
       const QString IMAGE_PATH = ":/res/res/image/camera/example.jpg";
       const QString IMAGE_PATH_ = ":/res/res/image/banna/2.jpg";
 private:
     void initValue();
-    //void  func();
 
 };
 

@@ -30,7 +30,6 @@ ControlTabWidget::~ControlTabWidget()
 void ControlTabWidget::initValue()
 {
     //隐藏tabbar
-    /*柳秀*/
     //ui->tabWidgetControl->tabBar()->setHidden(true);//隐藏上面选项卡
     ui->tabWidgetControl->tabBar()->setTabsClosable(true);//选项卡显示
     //移除部分没有用的选项卡
@@ -47,27 +46,6 @@ void ControlTabWidget::initValue()
     ui->tabWidgetControl->setAutoFillBackground(true);//背景透明
     ui->tabWidgetControl->setPalette(palette);
     ui->tabWidgetControl->tabBar()->setPalette(palette);
-
-   // {
-   //     TabWidgetData tabWidgetData;
-    //    tabWidgetData.currentWidget = ui->tabBanna;
-   //     tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_BANNA);
-    //    mapTabWidget[TAB_BANNA] = tabWidgetData;
-   // }
-
-//    {
-//        TabWidgetData tabWidgetData;
-//        tabWidgetData.currentWidget = ui->tabCylinder;
-//        tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_CYLINDER);
-//        mapTabWidget[TAB_CYLINDER] = tabWidgetData;
-//    }
-
-//    {
-//        TabWidgetData tabWidgetData;
-//        tabWidgetData.currentWidget = ui->tabProgress;
-//        tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_PROGRESS);
-//        mapTabWidget[TAB_PROGRESS] = tabWidgetData;
-//    }
     //面板
     {
         TabWidgetData tabWidgetData;
@@ -76,20 +54,6 @@ void ControlTabWidget::initValue()
         mapTabWidget[TAB_FRAME] = tabWidgetData;
         ui->tabWidgetControl->setCurrentWidget(tabWidgetData.currentWidget);
     }
-
-//    {
-//        TabWidgetData tabWidgetData;
-//        tabWidgetData.currentWidget = ui->tabPlot;
-//        tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_CUSTOM_PLOT);
-//        mapTabWidget[TAB_CUSTOM_PLOT] = tabWidgetData;
-//    }
-
-//    {
-//        TabWidgetData tabWidgetData;
-//        tabWidgetData.currentWidget = ui->tabMoveButton;
-//        tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_MOVE_BUTTON);
-//        mapTabWidget[TAB_MOVE_BUTTON] = tabWidgetData;
-//    }
     //表格
     {
         TabWidgetData tabWidgetData;
@@ -97,21 +61,6 @@ void ControlTabWidget::initValue()
         tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_TABLE_WIDGET);
         mapTabWidget[TAB_TABLE_WIDGET] = tabWidgetData;
     }
-
-
-//    {
-//        TabWidgetData tabWidgetData;
-//        tabWidgetData.currentWidget = ui->tabSlider;
-//        tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_SLIDER);
-//        mapTabWidget[TAB_SLIDER] = tabWidgetData;
-//    }
-
-//    {
-//        TabWidgetData tabWidgetData;
-//        tabWidgetData.currentWidget = ui->tabOpengl;
-//        tabWidgetData.currentTabText = ui->tabWidgetControl->tabText(TAB_OPENGL);
-//        mapTabWidget[TAB_OPENGL] = tabWidgetData;
-//    }
 }
 
 /******************   点击树形项显示对应Tab页     *********************/
@@ -128,18 +77,10 @@ void ControlTabWidget::receiveShowCurrentTab(WidgetTabType widgetTabType)
 
 void ControlTabWidget::on_pBn_Add_clicked()
 {
-  //  ListAdd list;
-  //  list.showNormal();
 
-    //list=new Ui::ListAdd();
-   // list->show();
-    //listadd* new ListAdd(this);
-   //ListAdd listadd;
-   // listadd.showNormal();
-  // QMessageBox::warning(0,QObject::tr("提示"),"对方拒绝接收！");
 }
 
 void ControlTabWidget::on_pBn_Search_clicked()
 {
-   //
+
 }

@@ -11,7 +11,6 @@
 
 class QLabel;
 class QPushButton;
-class QLabel;
 class FlowLayout;
 
 
@@ -26,16 +25,15 @@ public:
     void setTitleInfo(const QString &title);//
     void createFrame(const QPixmap &pixMap,int index );//const QString &title
     void mouseDoubleClickEvent(QMouseEvent *);
-     QLabel *labelImage;
-private:
+    QLabel *labelImage;
 
-    QLabel *labelTitle;
+private:
     QWidget *fw;
-    //FlowLayout *flowLayout;
+    QLabel *labelTitle;
     QPushButton *pushButtonDownLoad;
 private:
-   // const int IMAGE_WIDTH = 300;
-    //const int IMAGE_HEIGHT = 200;
+    const int IMAGE_WIDTH = 300;
+    const int IMAGE_HEIGHT = 200;
     const int FIXED_WIDTH = 300;
     const int FIXED_HEIGHT = 200;
     const int BUTTON_WIDTH = 80;

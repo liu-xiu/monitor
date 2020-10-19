@@ -15,12 +15,6 @@ FrameWidget::FrameWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     this->initValue();
-    //this->labelImage->installEventFilter(this);
-    ///在这定义信号与曹  flowLayout
-    ///1.flowLayout加一个双击事件
-    ///2.获取那个FrameControl
-    ///
-   // connect(ui->scrollAreaWidgetContents_2,SIGNAL(mouseDoubleClickEvent),this,SLOT(func()));
 }
 // 析构函数
 FrameWidget::~FrameWidget()
@@ -35,18 +29,8 @@ void FrameWidget::getStr(FrameControl *frame)
     //frame->setGeometry(300,300,700,700);
     frame->setFixedWidth(1800);
     frame->setFixedHeight(900);
-    //frame->labelImage->setFixedSize(1800, 900);
-    //frame->labelImage->setScaledContents(true);
-
-//   path=str;
-//   //flowLayout = new FlowLayout(ui->scrollAreaWidgetContents_2);
-
-//   FrameControl *frameControl = new FrameControl();
-//   frameControl->createFrame(QPixmap(path), 1);
-//   frameControl->showMaximized();
-//   //frameControl->setAttribute(Qt::WA_TranslucentBackground);//无边框
-//   flowLayout->addWidget(frameControl);
-
+    frame->labelImage->setFixedSize(1800, 900);
+    frame->labelImage->setScaledContents(true);
 }
 
 // 初始化
@@ -54,7 +38,6 @@ void FrameWidget::initValue()
 {
     flowLayout = new FlowLayout(ui->scrollAreaWidgetContents_2);
     ui->groupBox->setStyleSheet("QGroupBox{border:none}");
-    //ui->groupBox_2->setStyleSheet("QGroupBox{border:none}");
     for (int i = 0; i < 20; i++)
     {
         FrameControl *frameControl = new FrameControl(this);
@@ -63,23 +46,8 @@ void FrameWidget::initValue()
         //存起来
         //FrameControl vector[10]=new FrameControl(this);
         QString vector[20];
-      //  vector[i]=frameControl;
+        //vector[i]=frameControl;
         flowLayout->addWidget(frameControl);
     }
-
-}
-//void FrameWidget::mouseDoubleClickEvent(QMouseEvent *)
-//{
-
-//    flowLayout_ = new FlowLayout(ui->scrollAreaWidgetContents_2);
-//    labelImage->setFixedSize(700, 500);
-//   // this->labelImage->setWindowFlags(Qt::Dialog);
-//    flowLayout_->addWidget(labelImage);
-
-//   //this->labelImage->showFullScreen();
-//}
-
-void FrameWidget::on_pBn_Down_clicked()
-{
 
 }
