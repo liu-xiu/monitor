@@ -10,6 +10,9 @@
 #include <QDebug>
 #include "framecontrol.h"
 #include<QLabel>
+#include "avglobal.h"
+#include "dhconfigsdk.h"
+#include "dhnetsdk.h"
 
 class FlowLayout;
 class QLabel;
@@ -29,12 +32,21 @@ public:
     Ui::FrameWidget *ui;
     FlowLayout *flowLayout;//
     FlowLayout *flowLayout_;
+    static void CALLBACK HaveReConnect(LLONG lLoginID,char *pchDVRIP,LONG nDVRPort,LDWORD dwUser);
+    static void CALLBACK fRealDataCB(LLONG lRealHandle, DWORD dwDataType, BYTE *pBuffer, DWORD dwBufSize, LLONG param,LDWORD dwUser);
+    static void CALLBACK DisConnectFunc(LLONG lLoginID, char *pchDVRIP, LONG nDVRPort, DWORD dwUser);
    // void mouseDoubleClickEvent(QMouseEvent *);
 private slots:
     void getStr(FrameControl *frame);
 private:
-      const QString IMAGE_PATH = ":/res/res/image/camera/example.jpg";
-      const QString IMAGE_PATH_ = ":/res/res/image/banna/2.jpg";
+    void initSDK();
+    char* D_Ip ;
+    char* D_UserName;
+    char* D_Pasdwd;
+    QString D_Port;
+    int nIndex = 0;
+    const QString IMAGE_PATH = ":/res/res/image/camera/example.jpg";
+    const QString IMAGE_PATH_ = ":/res/res/image/banna/2.jpg";
 private:
     void initValue();
 

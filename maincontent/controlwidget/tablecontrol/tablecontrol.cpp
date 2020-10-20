@@ -94,7 +94,7 @@ void TableControl::on_pBn_Add_clicked()
 void TableControl::select_Bind()
 {
     int i = 0;
-    QString open_file_name ="D:/build-QCoolPage-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/123.csv";
+    QString open_file_name ="E:/Desktop/build-CSV-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/54.csv";
     QFile file(open_file_name);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -126,7 +126,7 @@ void TableControl::select_Bind()
 //更新csv文件
 void TableControl::on_pBn_Push_clicked()
 {
-    QString filename = "D:/build-QCoolPage-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/123.csv";
+    QString filename = "E:/Desktop/build-CSV-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/54.csv";
     if(filename.isEmpty())
         return;
     QFile file(filename);
@@ -161,7 +161,7 @@ void TableControl::on_pBn_Push_clicked()
 void TableControl::on_pBn_PutIn_clicked()
 {
     int i = 0;
-    QString open_file_name =QFileDialog::getOpenFileName(this,tr("Excel file"),tr("C:\\"),tr("*.csv"));
+    QString open_file_name =QFileDialog::getOpenFileName(this,tr("Excel file"),tr("E:\\"),tr("*.csv"));
     QFile file(open_file_name);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

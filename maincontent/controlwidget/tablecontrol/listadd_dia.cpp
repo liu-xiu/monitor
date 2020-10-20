@@ -45,7 +45,7 @@ void ListAdd_Dia::on_pBn_Add_clicked()
        QMessageBox::warning(this, tr("提示"),tr("设备型号不可为空!"), QMessageBox::Yes);
        return;
      }
-        QString filename = "D:/build-QCoolPage-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/123.csv";
+        QString filename = "E:/Desktop/build-CSV-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/54.csv";
         QFile file(filename);
         file.open(QIODevice::WriteOnly|QIODevice::Append);//在文件末尾添加。
         QString str = "";

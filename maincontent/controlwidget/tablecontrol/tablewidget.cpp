@@ -29,7 +29,7 @@ TableWidget::~TableWidget()
 // 初始化数据
 void TableWidget::initValue()
 {
-    QString open_file_name ="D:/build-QCoolPage-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/123.csv";
+    QString open_file_name ="E:/Desktop/build-CSV-Desktop_Qt_5_9_9_MSVC2013_64bit-Debug/debug/54.csv";
     QFile file(open_file_name);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

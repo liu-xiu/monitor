@@ -16,7 +16,6 @@
 #include <QMessageBox>
 #include <QLabel>
 #include <QPushButton>
-#include "framewidget.h"
 
 
 // 构造函数
@@ -56,7 +55,7 @@ void FrameControl::createFrame(const QPixmap &pixMap, int index)
         labelImage = new QLabel(this);
         pixMap.scaled(IMAGE_WIDTH,IMAGE_HEIGHT);
         labelImage->setFixedSize(IMAGE_WIDTH, IMAGE_HEIGHT);
-        labelImage->setPixmap(pixMap);
+        //labelImage->setPixmap(pixMap);
         labelImage->setScaledContents(true);
         QVBoxLayout *vBoxLayout = new QVBoxLayout();
         //vBoxLayout->addWidget(labelTitle);
