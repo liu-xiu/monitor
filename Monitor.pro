@@ -131,3 +131,7 @@ RESOURCES += \
     res/textures.qrc
 
 RC_FILE += myapp.rc
+
+LIBS    += "$$PWD/lib/win64/dhconfigsdk.lib"
+LIBS    += "$$PWD/lib/win64/dhnetsdk.lib"
+

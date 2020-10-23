@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1253</width>
+    <width>1336</width>
     <height>353</height>
    </rect>
   </property>
@@ -151,6 +151,16 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="pBn_UpLoad">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>推流</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="pBn_Edit">
            <property name="styleSheet">
             <string notr="true">color: rgb(255, 255, 255);</string>
@@ -254,6 +264,26 @@
         <column>
          <property name="text">
           <string>端口</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>在线状态</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>推流状态</string>
          </property>
          <property name="font">
           <font>

@@ -7,6 +7,7 @@
 #include "ui_framewidget.h"
 #include "flowlayout/flowlayout.h"
 #include "framecontrol.h"
+#include<QMessageBox>
 LLONG LoginHandle;//登录句柄
 LLONG lHandle;//监视句柄
 LLONG attachpassHnd;//订阅客流句柄
@@ -25,16 +26,6 @@ FrameWidget::~FrameWidget()
 {
     delete ui;
 }
-void FrameWidget::initSDK(){
-    if(CLIENT_Init((fDisConnect)this->DisConnectFunc, (LDWORD)0))
-    {
-        qDebug()<<"SDK INIT OK!"<<endl;
-    }
-    else
-    {
-        qDebug()<<"SDK INIT FAIL!"<<endl;
-    }
-}
 //断线回调
 void CALLBACK FrameWidget::DisConnectFunc(LLONG lLoginID, char *pchDVRIP, LONG nDVRPort, DWORD dwUser)
 {
@@ -48,7 +39,17 @@ void CALLBACK FrameWidget::DisConnectFunc(LLONG lLoginID, char *pchDVRIP, LONG n
     printf("dwUser[%p]\n",dwUser);
     printf("\n");
 }
-QString path;
+
+void FrameWidget::initSDK(){
+    if(CLIENT_Init((fDisConnect)this->DisConnectFunc, (LDWORD)0))
+    {
+        qDebug()<<"SDK INIT OK!"<<endl;
+    }
+    else
+    {
+        qDebug()<<"SDK INIT FAIL!"<<endl;
+    }
+}
 //隐藏多余的，思路是建一个vector数组，存放每次new的framecontrol对象，然后遍历这个数组，对于没有双击的都隐藏
 //双击之后还得还回去没有实现呢
 void FrameWidget::getStr(FrameControl *frame)
@@ -63,10 +64,14 @@ void FrameWidget::getStr(FrameControl *frame)
 // 初始化
 void FrameWidget::initValue()
 {
-    D_Ip="192.168.0.66";
-    D_UserName="admin";
-    D_Pasdwd="admin";
-    D_Port ="3777";
+    ui->tw->setStyleSheet("#tw::item{height:30px;}");
+    //ui->toolBox->setStyleSheet("#toolBox::item{margins:none;}");
+    ui->tw->setContentsMargins(0,0,0,0);
+    ui->groupBox->setStyleSheet("QGroupBox{border:none}");
+    strcpy(D_Ip,"192.168.0.66");
+    strcpy(D_UserName,"admin");
+    strcpy(D_Pasdwd,"admin");
+    D_Port = 37777;
     //SDK初始化
     if(CLIENT_Init((fDisConnect)DisConnectFunc, (LDWORD)0))
     {
@@ -97,14 +102,43 @@ void FrameWidget::initValue()
     strncpy(stInparam.szIP, D_Ip, sizeof(stInparam.szIP) - 1);
     strncpy(stInparam.szPassword, D_Pasdwd, sizeof(stInparam.szPassword) - 1);
     strncpy(stInparam.szUserName, D_UserName, sizeof(stInparam.szUserName) - 1);
-    stInparam.nPort = D_Port.toInt();
+    stInparam.nPort = D_Port;
     stInparam.emSpecCap = EM_LOGIN_SPEC_CAP_TCP;
     tagNET_OUT_LOGIN_WITH_HIGHLEVEL_SECURITY stOutparam;
     LoginHandle = CLIENT_LoginWithHighLevelSecurity(&stInparam, &stOutparam);
     qDebug()<<"LoginHandle="<<LoginHandle<<endl;
+    if (LoginHandle)
+    {
+        QMessageBox::about(NULL,ui->cameraIp->text(),"连接成功");
+    }
+    else
+    {
+        QMessageBox::about(NULL,ui->cameraIp->text(),"登录失败哦");
+    }
+    h_next();
+//    flowLayout = new FlowLayout(ui->scrollAreaWidgetContents_2);
+//    ui->groupBox->setStyleSheet("QGroupBox{border:none}");
+//    for (int i = 0; i < 20; i++)
+//    {
+//        FrameControl *frameControl = new FrameControl(this);
+//        frameControl->createFrame(QPixmap(IMAGE_PATH), 0);
+//        frameControl->setAttribute(Qt::WA_TranslucentBackground);//无边框
+//        //存起来
+//        //FrameControl vector[10]=new FrameControl(this);
+//        QString vector[20];
+//        //vector[i]=frameControl;
+//        flowLayout->addWidget(frameControl);
+//    }
+}
+void FrameWidget::h_next()
+{
+    if(FALSE == LoginHandle)
+    {
+        QMessageBox::about(NULL,ui->cameraIp->text(),"连接失败");
+        return;
+    }
     //获取Label句柄
-    HWND hWnd =(HWND)ui->toolBox->winId();
-            //imageLabel->winId();
+    HWND hWnd = (HWND)ui->scrollAreaWidgetContents_2->winId();
     //监视
     lHandle = CLIENT_RealPlayEx(LoginHandle,0, hWnd);//实时监视句柄
     if (lHandle)
@@ -118,19 +152,54 @@ void FrameWidget::initValue()
     {
         qDebug() << "CLIENT_RealPlayEx: failed! Error code" <<CLIENT_GetLastError()<< endl;
     }
-    flowLayout = new FlowLayout(ui->scrollAreaWidgetContents_2);
-    ui->groupBox->setStyleSheet("QGroupBox{border:none}");
-    for (int i = 0; i < 20; i++)
+
+}
+void FrameWidget::h_openPassengerFlow()
+{
+    if(FALSE == LoginHandle)
     {
-        FrameControl *frameControl = new FrameControl(this);
-        frameControl->createFrame(QPixmap(IMAGE_PATH), 0);
-        frameControl->setAttribute(Qt::WA_TranslucentBackground);//无边框
-        //存起来
-        //FrameControl vector[10]=new FrameControl(this);
-        QString vector[20];
-        //vector[i]=frameControl;
-        flowLayout->addWidget(frameControl);
+        QMessageBox::about(NULL,ui->cameraIp->text(),"未连接登录");
+        return;
     }
+    NET_IN_ATTACH_VIDEOSTAT_SUM
+            InParam={sizeof(NET_IN_ATTACH_VIDEOSTAT_SUM)};
+    InParam.nChannel=0;
+    InParam.cbVideoStatSum=&VideoStatSumCallback;
+    NET_OUT_ATTACH_VIDEOSTAT_SUM OutParam={0};
+    OutParam.dwSize=sizeof(OutParam);
+    int nWaitTime=5000; //wait time
+    // 订阅客流量统计
+    attachpassHnd = CLIENT_AttachVideoStatSummary(LoginHandle,&InParam,&OutParam,nWaitTime);
+    if(attachpassHnd)
+    {
+        qDebug() << "CLIENT_AttachVideoStatSummary sucess!" << endl;
+    }
+    else
+    {
+        qDebug() << "error number:" <<CLIENT_GetLastError() << endl;
+    }
+
+}
+void FrameWidget::h_closePassengerFlow()
+{
+    if(FALSE == LoginHandle)
+    {
+        QMessageBox::about(NULL,ui->cameraIp->text(),"未连接登录");
+        return;
+    }
+    if(FALSE == attachpassHnd)
+    {
+        QMessageBox::about(NULL,ui->cameraIp->text(),"未订阅客流统计");
+        return;
+    }
+    CLIENT_DetachVideoStatSummary(attachpassHnd);
+}
+//客流数据回调
+void CALLBACK FrameWidget::VideoStatSumCallback(LLONG lAttachHandle, NET_VIDEOSTAT_SUMMARY* pBuf,
+                                               DWORD dwBufLen, LDWORD dwUser)
+{
+    // 处理回调数据
+    qDebug() << "\nchannel:" <<pBuf->nChannelID << "\nname:"<< pBuf->szRuleName<< "\nenter:"<< pBuf->stuEnteredSubtotal.nTotal<< "\nleave:"<< pBuf->stuExitedSubtotal.nTotal<< endl;
 }
 void CALLBACK FrameWidget::fRealDataCB(LLONG lRealHandle, DWORD dwDataType, BYTE *pBuffer, DWORD dwBufSize, LLONG param,LDWORD dwUser)
 {

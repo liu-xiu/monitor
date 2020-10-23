@@ -31,6 +31,10 @@
         <file>res/image/camera/example.jpg</file>
         <file>res/image/Down.png</file>
         <file>res/image/Up.png</file>
+        <file>res/image/add.png</file>
+        <file>res/image/minus.png</file>
+        <file>res/image/zoom-in.png</file>
+        <file>res/image/zoom-out.png</file>
     </qresource>
     <qresource prefix="/qt">
         <file>etc/qt.conf</file>
